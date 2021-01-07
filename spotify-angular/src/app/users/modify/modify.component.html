@@ -1,0 +1,41 @@
+<h1>Editer votre profil</h1>
+
+<form class="row" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="col-md-4">
+
+         <img *ngIf="selectedFile; else noSelected" [src]="fileUrl" alt="">
+         
+          <label for="avatar"></label>
+          <input type="file" 
+                 id="avatar"
+                 name="avatar"
+                 class="form-control"
+                 formControlName="avatar" (change)="onFileSelected($event)">
+      </div>
+      <div class="col-md-8">
+        <div class="form-group">
+            <label for="pseudo">Pseudo</label>
+            <input type="text"
+                   id="pseudo"
+                   class="form-control"
+                   formControlName="pseudo">
+          </div>
+          <div class="form-group">
+            <label for="email">Adresse mail</label>
+            <input type="text"
+                   id="email"
+                   class="form-control"
+                   formControlName="email">
+          </div>
+
+          <button type="submit"
+               [disabled]="userForm.invalid"
+               class="btn btn-primary">Sauvegarder les informations
+            </button>
+      </div>
+</form>
+<div *ngIf="message" class="alert alert-success mt-5">{{message}}</div>
+
+<ng-template #noSelected>
+      <img src="data:image/png;base64,{{currentUser.img_user}}" alt="">
+</ng-template>

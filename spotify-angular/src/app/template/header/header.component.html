@@ -1,0 +1,61 @@
+    <mat-menu #appMenu="matMenu" >
+      <ng-template matMenuContent>
+        <a routerLink="editer"><button mat-menu-item class="matmenubutton">Editer profil</button></a>
+        <a [routerLink]="['playlists', currentUser.id_user]"><button mat-menu-item class="matmenubutton">Mes playlists</button></a>
+      </ng-template>
+    </mat-menu>
+
+<nav *ngIf="currentUser" class="navbar navbar-expand">
+  <div class="row justify-content-between">
+
+    <ul class="navbar-nav mr-auto ml-4" *ngIf="isAuth">
+      <li class="dropdown mt-1">
+        <a class="dropdown-toggle"  data-toggle="dropdown">
+          <button class="img-profile" mat-icon-button [matMenuTriggerFor]="appMenu">
+            <img *ngIf="currentUser.img_user; else defaultAvatar" class="" src="data:image/png;base64,{{currentUser.img_user}}">
+          </button>
+        </a>
+      </li>
+      <li class="nav-item ml-4">
+        <a class="nav-link" routerLinkActive="active" routerLink="accueil">Accueil</a>
+      </li>
+    </ul>
+
+
+
+    <ul class="navbar-nav float-right">
+
+      <li class="nav-item" routerLinkActive="active" *ngIf="!isAuth">
+        <a class="nav-link" routerLink="inscription">
+          <span class="glyphicon glyphicon-user"></span> Créer un compte
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="!isAuth">
+        <a class="nav-link" routerLink="connexion">
+          <span class="glyphicon glyphicon-log-in"></span> Connexion
+        </a>
+      </li>
+
+      <li class="search my-2" *ngIf="isAuth">
+        <form class="">
+          <input class="form-control searchbar mr-1" id="listSearch" type="text" placeholder="Rechercher..">
+          <button (click)="onSearch()" class="btn btn-outline-primary">OK</button>
+        </form>
+      </li>
+
+      <li class="nav-item my-auto" *ngIf="isAuth">
+        <a class="nav-link" routerLink="editer">Bienvenue {{currentUser.nom_user}}</a>
+      </li>
+
+      <li class="nav-item my-auto ml-3" routerLinkActive="active" *ngIf="isAuth">
+        <a class="nav-link" (click)="onSignOut()">
+          <img class="icon mr-1" src="./assets/images/logout.svg" alt=""> Déconnexion
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<ng-template #defaultAvatar>
+  <img src="./assets/images/avatar.jpg" alt="">
+</ng-template>

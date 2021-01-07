@@ -1,0 +1,83 @@
+<div id="page" (click)=removeCurtain()></div>
+
+<section *ngIf="album">
+
+    <div class="row playlist-header p-4 mx-3 mb-3">
+      <div class="col-sm-3">
+        <img class="cover" src="data:image/png;base64,{{album.img_album}}" alt="album cover">
+      </div>
+
+      <div class="col-sm-6 pt-4">
+        <h3>Album</h3>
+        <div class="mb-3">
+          <h2> {{album.nom_album}} <small>de <a [routerLink]="['/artiste', album.artiste.id_artiste]">{{album.artiste.nom_artiste}}</a></small></h2>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div >
+          <img id="vinyleBlock" class="vinyle mx-auto" src="./assets/images/vinyle.png" alt="vinyle" (click)="playAlbum()">
+        </div>
+        <img *ngIf="!state.playing" class="playlist-header-play" src="./assets/images/playwhite.png"  >
+      </div>
+    </div>
+    
+
+    <div  *ngIf="titresList">
+      <div *ngIf="titresList.length > 0; else loading">
+
+      <div *ngFor="let titre of titresList; let i = index" class="titre-container"
+      [ngClass]="{'playing': i == currentFile.index}">
+        <img src="./assets/images/playwhite.png" (click)="playSingleTitre(this.titre.id_titre, i)" >
+        <span class="titre">{{titre.nom_titre}}</span> -
+        <span class="artiste" *ngFor="let artiste of titre.listArtistes; let j = index">
+          <span *ngIf="j>0"> / </span>{{artiste.nom_artiste}}
+        </span>    
+        <!-- Bloc caché par défaut et affiché après clic sur le plus -->
+        <div class="add-to-playlist">
+          <h4>Ajouter <span class="titre-name">{{titre.nom_titre}}</span> à une de vos playlists</h4>
+          <div *ngIf="playlists">
+
+            <div *ngFor="let playlist of playlists; let k = index" class="titre-container" (click)="onClickAddToPlaylist(playlist, titre, k)">
+              <div *ngIf="titreMessage && k==successId" class="message alert alert-success">              
+                {{titreMessage}}
+              </div>
+              <span >{{playlist.nom_playlist}}</span>
+
+              <img *ngIf="!inPlaylist" class="add" src="./assets/images/add.png" alt="">
+              
+
+            </div>
+          </div>
+          ou<br><br>
+          <h4>Créer une nouvelle playlist</h4>
+            <div class="new-playlist">
+              <input type="text" 
+                   class="form-control new-playlist-input mr-2"
+                   placeholder="Entrez le titre ici...">
+              <button class="btn btn-primary" (click)="onSubmit(titre, i)">Créer</button>
+            </div>
+            <div *ngIf="playlistMessage" class="alert alert-success">
+              {{playlistMessage}}
+            </div>
+        <div >
+          <!-- Fin du bloc caché par défaut-->
+          </div>
+        </div>
+        <img class="add" src="./assets/images/addwhite.png" (click)="onClickAdd(i)">
+      </div>
+    </div>
+    </div>
+
+</section>
+
+<ng-template #loading>
+  <div class="mt-5 text-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>
+
+
+

@@ -1,0 +1,62 @@
+.container {
+  padding:0px;
+  margin-bottom: 15rem;
+  width: auto;
+}
+
+.albums .titre-section{
+    background:linear-gradient(90deg, #fffbd5 0%,#00e4ff 100% );
+  }
+
+.playlists .titre-section{
+    background:linear-gradient(90deg, #fffbd5 0%,#ff2929 100% );
+  }
+
+.tendances .titre-section{
+    background:linear-gradient(90deg, #fffbd5 0%,#00ff5b 100% );
+}
+
+.categories .titre-section {
+  background:linear-gradient(90deg, #fffbd5 0%,#ffa600 100% );
+}
+
+.titre-section{
+    margin-top: 40px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    color: #353232;
+    opacity: 90%;
+    border-radius: 5px;
+}
+
+.titre-section h2{
+    font-size: 3.5rem;
+    text-align: center;
+}
+
+.content-section{
+    display: flex;
+    overflow: scroll;
+    overflow-y: hidden;
+}
+
+/** Block contenant un élément (ex: 1album etc.) **/
+
+.block{
+    text-align: center;
+    color: #c9c9c9;
+}
+
+.block-content{
+  margin: 15px 0;
+}
+
+.block-content h3{
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.block img{
+    width: 250px;
+    height: 250px;
+}

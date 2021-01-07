@@ -1,0 +1,82 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  color: #c9c9c9;
+  background-color: #373738;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkgrey;
+  border-radius: 5px;
+}
+
+::ng-deep .mat-h2{
+  font-size: 3rem;
+}
+
+/* Container */
+
+.container{
+  margin-top: 1.5rem;
+  margin-bottom: 7rem;
+}
+
+section{
+  width: 900px;
+  margin: auto;
+}
+
+/* Titres */
+
+h2{
+  margin-top: 2rem;
+  font-size: 3rem;
+  text-align: center;
+}
+
+h3{
+  font-size: 1.2rem;
+}
+/* Images */
+
+img{
+  width: auto;
+}
+
+.icon{
+  width: 20px;
+}
+
+/** Liens **/
+
+a{
+  color: #e9e9e9;
+}
+
+a:hover{
+  color: #8d8d8d;
+  text-decoration: none;
+}
+
+/******** Titre en train d'être joué ***************/
+.playing{
+  background-color: rgb(94, 94, 94);
+  transition: 0.3s;
+}

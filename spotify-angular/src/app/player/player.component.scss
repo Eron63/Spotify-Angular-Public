@@ -1,0 +1,158 @@
+
+  .main-toolbar {
+    .spacer {
+      flex: 1 1 auto;
+    }
+    .toolbar-btn {
+      font-size: 16px;
+      margin-right:5px;
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    .logo {
+      margin: 2.5rem;
+      text-align: center;
+      font-size:24px;
+      color: #3f51b5;
+      .mat-icon{
+        height:160px !important;
+        width:160px !important;
+        font-size:160px !important;
+      }
+    }
+  }
+
+  .media-footer {
+    position: fixed;
+    bottom:0;
+    width:100%;
+    .time-slider {
+      width: 100% !important;
+      margin-left:20px;
+      margin-right:20px;
+    }
+    .media-action-bar {
+      width: 100%;
+      justify-content: center;
+      .mat-icon{
+        height:30px !important;
+        width:30px !important;
+        font-size:30px !important;
+      }
+    }
+  }
+
+
+.btn-primary{
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+ .mat-toolbar{
+   background-color:rgb(34, 34, 34, 0.95);
+}
+
+  .mat-toolbar-row{
+    height: 30px;
+  }
+
+.current-playing{
+  position: absolute;
+  left: 5rem;
+}
+
+.current-playing-content{
+  display: flex;
+  color: white;
+}
+
+/******* LATERAL PANEL *************/
+
+#lateral-panel {
+  z-index: 9999;                  /* pour être au dessus des autres éléments */
+  position: fixed;                /* ne suit pas le scroll de la page et sert de réfèrent */
+  top: 4.5rem;                         /* position en haut */
+  left: 0;                        /* à gauche */
+  width: 20em;                    /* valeur de largeur pour tout le contenu */
+  min-height: 70vh;               /* occupe 82% de la hauteur du viewport */
+  transform: translateX(-100%);   /* on déplace à gauche pour ne pas interférer avec le document */
+  color: #c9c9c9;
+}
+
+#lateral-panel-input {
+  position: absolute;           /* pour sortir l'élément du flux */
+  left: -999em;                 /* position hors de la fenêtre */
+}
+
+#lateral-panel-label {
+  z-index: 1;                   /* on le met au dessus */
+  position: absolute;           /* pour sortir l'élément du flux, il va bouger */
+  top: 0;                       /* position en haut */
+  left: 100%;                   /* alignement sur le bord droit du parent */
+  width: 3em;                   /* dimensions respectables */
+  height: 3em;
+  cursor: pointer;
+}
+
+#lateral-panel-bloc {
+  z-index: 0;                   /* mise au niveau zéro */
+  position: absolute;           /* pour sortir l'élément du flux, il va bouger */
+  top: 0;                       /* position en haut */  
+  left: 0;                      /* alignement sur bord gauche du parent */
+  box-sizing: border-box;       /* modèle de boîte, plus simple à gérer */
+  width: 100%;                  /* largeur 100% de son parent */
+  height: 100%;                 /* hauteur 100% de son parent */
+  overflow: auto;               /* rien ne doit déborder */
+  border: thin solid rgb(30, 134, 253);
+  border-radius: 10px;
+  //background: rgb(151, 204, 71);               /* il faut un fond opaque */
+
+}
+
+#lateral-panel-label,
+#lateral-panel-bloc {
+  font-size: inherit;             /* taille font du référent */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all .5s;
+}
+
+#lateral-panel-input:checked ~ #lateral-panel-label {
+  left: 197%;                     /* décalage vers la droite, passe de 100% à 200% */
+}   
+#lateral-panel-input:checked ~ #lateral-panel-bloc {
+  transform: translateX(97%);    /* translation vers la droite de 100% */
+}
+
+#lateral-panel-label:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  width: 1em;
+  height: 1em;
+  border: .5em solid currentColor;
+  border-width: .5em .5em 0 0;
+  color: #888;
+  transition: all .5s;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#lateral-panel-input:checked ~ #lateral-panel-label:before {
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+#lateral-panel h3{
+  display: block;
+  width: 100%;
+  height: 3rem;
+  text-align: center;
+}
+
+.icon-right{
+  float: right;
+  width: 1rem;
+}

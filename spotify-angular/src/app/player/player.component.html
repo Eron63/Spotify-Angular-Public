@@ -1,0 +1,61 @@
+  <div class="media-footer">
+
+    <div id="lateral-panel" >
+      <input id="lateral-panel-input" type="checkbox">
+      <label id="lateral-panel-label" for="lateral-panel-input"></label>
+      <div id="lateral-panel-bloc" class="bg-dark">
+        <h3 class="pt-3">Playlist courante</h3>
+
+        <ul *ngIf="files" class="list-group list-group-flush mx-auto">
+          <div *ngIf="files.length > 0; else noFiles">
+            <li *ngFor="let file of files; let i = index" class="list-group-item list-group-item-info">
+              <span [ngClass]="{'text-danger': i == currentFile.index}">
+                {{file.name}} - {{file.artist[0].nom_artiste}}
+              </span>
+              <img src="./assets/images/remove.png" class="icon-right" (click)="onRemoveTitre(file)">
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <ng-template #noFiles>
+      <span class="text-center">La playlist courante est vide.</span>
+    </ng-template>
+
+    <mat-toolbar >
+      <mat-toolbar-row *ngIf="currentFile">
+        {{ state?.readableCurrentTime }}
+        <mat-slider class="time-slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" [disabled]="state?.error"></mat-slider>
+        {{ state?.readableDuration }}
+      </mat-toolbar-row>
+      <mat-toolbar-row class="media-action-bar">
+
+        <div *ngIf="currentFile.file" class="current-playing">
+
+          <div class="current-playing-content">
+            <mat-icon  mat-list-icon>music_note</mat-icon>
+            <h4 class="mr-3" mat-line>{{ currentFile.file.name }}</h4>
+            <small> de {{currentFile.file.artist[0].nom_artiste}}</small>
+          </div>
+        </div>
+
+        <button mat-button class="btn-primary" [disabled]="isFirstPlaying()" (click)="previous()">
+          <mat-icon mat-list-icon>skip_previous</mat-icon>
+        </button>
+
+        <button mat-button class="btn-primary" (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing">
+          <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+        </button>
+
+        <button mat-button class="btn-primary" (click)="pause()" *ngIf="state?.playing">
+          <mat-icon mat-list-icon>pause</mat-icon>
+        </button>
+
+        <button  mat-button class="btn-primary" [disabled]="isLastPlaying()"  (click)="next()">
+          <mat-icon mat-list-icon>skip_next</mat-icon>
+        </button>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>

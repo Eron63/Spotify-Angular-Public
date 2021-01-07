@@ -1,0 +1,86 @@
+<div *ngIf="searchResult" class="container">
+  <div *ngIf="searchResult.length > 0; else loading">
+
+    <div *ngIf="searchResult[0].length > 0" class="titres">
+      <div class="titre-section">
+        <h2>Titres</h2>
+      </div>
+  
+      <div class="content-section">
+        <div *ngFor="let titre of searchResult[0]" class="block">
+          <a [routerLink]="['/album', titre.id_titre]">
+            <img src="./assets/images/vinyle.png">
+          </a>
+          <div class="block-content">
+            <h3>{{titre.nom_titre}} </h3>
+            de 
+            <span *ngFor="let artiste of titre.listArtistes; let i = index">
+                <span *ngIf="i>0"> / </span>{{artiste.nom_artiste}}
+            </span>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div *ngIf="searchResult[2].length > 0" class="albums">
+      <div class="titre-section">
+        <h2>Albums</h2>
+      </div>
+  
+      <div class="content-section">
+        <div *ngFor="let album of searchResult[2]" class="block">
+          <a [routerLink]="['/album', album.id_album]">
+            <img src="data:image/png;base64,{{album.img_album}}">
+          </a>
+          <div class="block-content">
+            <h3>{{album.nom_album}} </h3>
+            de {{album.artiste.nom_artiste}} <small>({{album.date_album}})</small>
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <div *ngIf="searchResult[3].length > 0" class="artistes">
+      <div class="titre-section">
+        <h2>Artistes</h2>
+      </div>
+  
+      <div class="content-section">
+        <div *ngFor="let artiste of searchResult[3]" class="block">
+          <a [routerLink]="['/artiste', artiste.id_artiste]">
+            <img src="./assets/images/vinyle.png">
+          </a>
+          <div class="block-content">
+            <h3>{{artiste.nom_artiste}} </h3>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div *ngIf="searchResult[1].length > 0" class="categories">
+      <div class="titre-section">
+        <h2>Catégories</h2>
+      </div>
+  
+      <div class="content-section">
+        <div *ngFor="let categorie of searchResult[1]" class="block">
+          <a [routerLink]="['/categorie', categorie.id_categorie]">
+            <img src="./assets/images/vinyle.png">
+          </a>
+          <div class="block-content">
+          <h3>{{categorie.nom_categorie}} </h3>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+    
+</div>
+
+<ng-template #loading>
+  <div class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>

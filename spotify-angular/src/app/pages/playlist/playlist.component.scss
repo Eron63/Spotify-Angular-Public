@@ -1,0 +1,108 @@
+
+/********* HEADER ******************/
+
+.playlist-header{
+  height: 224px;
+  text-align: center;
+  border: 4px solid #c9C9C9;
+}
+
+.playlist-header h2{
+}
+
+.playlist-header img{
+  width: 10rem;
+  display: block;
+}
+
+.playlist-header-play{
+  opacity: 1;
+  margin-top: 1rem;
+}
+
+.vinyle{
+  position: absolute;
+  top: 0;
+  opacity: 0.9;
+}
+
+/*** ANIMATION VINYLE ****/
+
+.rotation{
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+/*** ****/
+.titre-container{
+  color: white;
+  border: 2px solid black;
+  margin-bottom: 1.8rem;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+.titre-container img{
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.titre{
+  margin-left: 1.2rem;
+}
+
+.artiste{
+  color: #c9c9c9;
+}
+
+.icons{
+  float: right;
+}
+
+h2{
+  font-size: 2.5rem;
+}
+/***** spoiler ***************/
+
+#spoilerEdit{
+  display: none;
+  transition: 0.5s;
+}
+
+/** slider pour changer le nom de la playlist ***/
+
+#editButton {
+  overflow: hidden;
+  width: 230px;
+}
+
+#slider {
+  display: flex;
+  width: 200%;
+  transition: 0.5s;
+}
+
+#slider.expanded {
+  transform: translateX(-50%);
+}
+
+#toggle {
+  flex: 0 0 50%;
+}
+
+#input {
+  flex: auto;
+}
+
+#ok {
+  flex: none;
+}
+
+#ok img{
+  height: 1rem;
+}

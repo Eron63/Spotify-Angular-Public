@@ -1,0 +1,35 @@
+
+<div class="albums">
+
+    <div *ngIf="albumsList">
+        <div class="row mb-5">
+          <div class="col-sm-4">
+            <img src="data:image/png;base64,{{albumsList[0].artiste.img_artiste}}" alt="avatar de l'artiste">
+          </div>
+          <div class="col-sm-8">
+            <h2>{{albumsList[0].artiste.nom_artiste}}</h2>
+            <h3>Biographie</h3>
+              <p>
+                {{albumsList[0].artiste.biographie}}
+              </p>
+
+            <div class="">
+              <h3>Liste des albums</h3>
+              <div class="content">
+                  <div *ngFor="let album of albumsList" class="block col-sm-4 mr-2">
+                      <a [routerLink]="['/album', album.id_album]">
+                        <img src="data:image/png;base64,{{album.img_album}}">
+                      </a>
+                      <h3>{{album.nom_album}} </h3>
+                      de {{album.artiste.nom_artiste}} <small>({{album.date_album}})</small>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  </div>
+
+
+

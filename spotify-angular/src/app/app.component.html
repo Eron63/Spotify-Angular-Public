@@ -1,0 +1,6 @@
+<app-header [currentUser]="currentUser"></app-header>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<app-player *ngIf="currentUser"></app-player>

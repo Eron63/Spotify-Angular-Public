@@ -1,0 +1,16 @@
+<div class="container" *ngIf="titresListe && categorie">
+  <h2>Titres {{categorie.nom_categorie}}</h2>
+
+  <div *ngIf="titresListe.length > 0; else emptyList">
+    <div *ngFor="let titre of titresListe | paginate: { itemsPerPage: 20, currentPage: p }" class="titre">
+      <img src="./assets/images/playwhite.png">
+      <span>{{titre.nom_titre}} - {{titre.nb_vues}} vues</span>
+      <img class="add" src="./assets/images/addwhite.png">
+    </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+  <ng-template #emptyList>
+    La catégorie ne contient pas encore de titres.
+  </ng-template>
+
+</div>

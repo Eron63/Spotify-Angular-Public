@@ -1,0 +1,76 @@
+<section *ngIf="playlist && currentUser">
+
+  <div class="row">
+
+    <div class="row col-md-8 playlist-header p-4 mx-3 mb-3">
+      <div class="col-sm-3">
+        <div >
+          <img id="vinyleBlock" class="vinyle mx-auto mt-3" src="./assets/images/vinyle.png" alt="vinyle" (click)="playPlaylist(this.playlist)">
+        </div>
+        <img *ngIf="!state.playing" class="playlist-header-play" src="./assets/images/playwhite.png"  >
+      </div>
+      <div class="col-sm-9 pt-4">
+        <h3>Playlist</h3>
+        <h2 class="mt-3">
+          {{playlist.nom_playlist}} <br><small>de {{playlist.user.nom_user}}</small>
+        </h2>
+      </div>
+    </div>
+    <div class="col-md-3 p-3">
+      <!-- Bloc d'administration de la playlist seulement visible au créateur de la playlist -->
+      <div *ngIf="playlist.user.id_user == currentUser.id_user" class="row mb-3 ">
+        <button class="btn text-light ml-5" (click)="displaySpoiler()">Gérer la playlist</button>
+        <div class="mt-3" id="spoilerEdit">
+          <button class="btn btn-danger btn-block" (click)="onDelete(playlist.id_playlist)">Supprimer la playlist</button>
+
+          <form id='editButton' class="mt-3">
+            <div id='slider' class='collapsed'>
+              <input type='button' id='toggle' value='Modifier le nom de la playlist' 
+                  class="form-control" (click)="expand()">
+              <input type='text' id='input' placeholder='Nouveau nom...' 
+              class="form-control" (blur)="collapse()">
+              <button class="btn btn-primary" id='ok' (click)="onSubmit()">
+                <img src="./assets/images/entree.png" alt="">
+              </button>
+            </div>
+          </form>
+          <span><small>{{playlistEditMessage}}</small></span>
+        </div>
+
+      </div>
+      <!-- Fin bloc admin -->
+    </div>
+  </div>
+  
+  <div *ngIf="playlist.listTitres.length > 0; else loading">
+
+    <div *ngFor="let titre of playlist.listTitres | paginate: { itemsPerPage: 15, currentPage: p }; let i = index" class="titre-container">
+        <img src="./assets/images/playwhite.png" (click)="playSingleTitre(this.titre.id_titre, i)" >
+
+     <span class="titre">{{titre.nom_titre}}</span> -
+      <span class="artiste" *ngFor="let artiste of titre.listArtistes; let j = index">
+        <span *ngIf="j>0"> / </span>{{artiste.nom_artiste}}
+      </span>
+      <div class="icons">
+        <!-- Bloc admin : icone "moins" permettant de supprimer un titre de la playlist-->
+        <span *ngIf="playlist.user.id_user == currentUser.id_user">
+          <img  src="./assets/images/remove.png" (click)="onRemoveTitre(titre)">
+        </span>
+        <!-- Fin bloc -->
+        <img  src="./assets/images/addwhite.png">
+      </div>
+      
+  </div>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  </div>
+  
+</section>
+
+<ng-template #loading>
+  <div class="text-center mt-5">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>
